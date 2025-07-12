@@ -160,7 +160,7 @@ contract ShortTest is Test {
 
         // Create close order
         skip(1);
-        bytes32 closeOrderKey = short.createCloseOrder();
+        bytes32 closeOrderKey = short.createCloseOrder{value: executionFee}();
 
         Order.Props memory closeOrder =
             reader.getOrder(DATA_STORE, closeOrderKey);
@@ -222,8 +222,8 @@ contract ShortTest is Test {
             "Keeper execution fee"
         );
         assertGe(
-            testHelper.get("ETH long after"),
-            testHelper.get("ETH long before"),
+            testHelper.get("ETH short after"),
+            testHelper.get("ETH short before"),
             "Close execution fee refund"
         );
 
